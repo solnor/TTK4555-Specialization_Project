@@ -12,7 +12,7 @@ b = [-0.05  0.05;
      -0.05 -0.05].';
 % b_n(dimension, cable)
 
-r = [0;1];
+r = [0.25;1];
 
 x = [r; 0];
 x_0 = [x(1); 0; x(2); 0; x(3);0];
@@ -26,7 +26,7 @@ l_0   = inverseKinematics(a, b, x, m)
 u   = cableUnitVectors(a, b, x, l_0, m);
 A_T = structureMatrix(u, x(3), b, m);
 A_T = A_T(2:4,:)
-m_p = 0.1;
+m_p = 2;
 w = [0;-9.81*m_p;0];
 
 f_min = 2*ones(m,1); %[N]
@@ -81,6 +81,8 @@ l_0(1)-f_0(1)*k_spring_inv(1,1)
 theta_r_0 = (l_0(1)-f_0(1)*k_spring_inv(1,1))/r_winch;
 l_0(1)-f_ref(1)*k_spring_inv(1,1)
 theta_r_0 = (l_0(1)-f_ref(1)*k_spring_inv(1,1))/r_winch;
+theta_r_0 = (l_0(1))/r_winch;
+theta_r_0 = (l_0-k_spring_inv*f_ref)/r_winch
 
 
 % MarLev position estimation constants
